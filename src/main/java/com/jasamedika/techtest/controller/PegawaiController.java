@@ -1,10 +1,7 @@
 package com.jasamedika.techtest.controller;
 
-import com.jasamedika.techtest.model.DepartemenComboBoxResponse;
-import com.jasamedika.techtest.model.JabatanComboBoxResponse;
-import com.jasamedika.techtest.model.WebResponse;
-import com.jasamedika.techtest.service.DepartemenService;
-import com.jasamedika.techtest.service.JabatanService;
+import com.jasamedika.techtest.model.*;
+import com.jasamedika.techtest.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +17,15 @@ public class PegawaiController {
 
     @Autowired
     private DepartemenService departemenService;
+
+    @Autowired
+    private UnitKerjaService unitKerjaService;
+
+    @Autowired
+    private PendidikanService pendidikanService;
+
+    @Autowired
+    private JenisKelaminService jenisKelaminService;
 
     @GetMapping(
             path = "/api/pegawai/combo/jabatan",
@@ -39,5 +45,35 @@ public class PegawaiController {
         List<DepartemenComboBoxResponse> comboBoxResponses = departemenService.getComboBox();
 
         return WebResponse.<List<DepartemenComboBoxResponse>>builder().data(comboBoxResponses).build();
+    }
+
+    @GetMapping(
+            path = "/api/pegawai/combo/unit-kerja",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<List<UnitKerjaComboBoxResponse>> getUnitKerjaComboBox(){
+        List<UnitKerjaComboBoxResponse> comboBoxResponses = unitKerjaService.getComboBox();
+
+        return WebResponse.<List<UnitKerjaComboBoxResponse>>builder().data(comboBoxResponses).build();
+    }
+
+    @GetMapping(
+            path = "/api/pegawai/combo/pendidikan",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<List<PendidikanComboBoxResponse>> getPendidikanComboBox(){
+        List<PendidikanComboBoxResponse> comboBoxResponses = pendidikanService.getComboBox();
+
+        return WebResponse.<List<PendidikanComboBoxResponse>>builder().data(comboBoxResponses).build();
+    }
+
+    @GetMapping(
+            path = "/api/pegawai/combo/jenis-kelamin",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<List<JenisKelaminComboBoxResponse>> getJenisKelaminComboBox(){
+        List<JenisKelaminComboBoxResponse> comboBoxResponses = jenisKelaminService.getComboBox();
+
+        return WebResponse.<List<JenisKelaminComboBoxResponse>>builder().data(comboBoxResponses).build();
     }
 }
