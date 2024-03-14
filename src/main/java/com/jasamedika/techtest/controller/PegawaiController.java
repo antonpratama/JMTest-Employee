@@ -27,6 +27,9 @@ public class PegawaiController {
     @Autowired
     private JenisKelaminService jenisKelaminService;
 
+    @Autowired
+    private PegawaiService pegawaiService;
+
     @GetMapping(
             path = "/api/pegawai/combo/jabatan",
             produces = MediaType.APPLICATION_JSON_VALUE
@@ -75,5 +78,25 @@ public class PegawaiController {
         List<JenisKelaminComboBoxResponse> comboBoxResponses = jenisKelaminService.getComboBox();
 
         return WebResponse.<List<JenisKelaminComboBoxResponse>>builder().data(comboBoxResponses).build();
+    }
+
+    @GetMapping(
+            path = "/api/pegawai/combo/departemen-hrd",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<List<DepartemenHRDComboBoxResponse>> getDepartemenHRDComboBox(){
+        List<DepartemenHRDComboBoxResponse> comboBoxResponses = pegawaiService.getComboBoxDepartemenHRD("hrd");
+
+        return WebResponse.<List<DepartemenHRDComboBoxResponse>>builder().data(comboBoxResponses).build();
+    }
+
+    @GetMapping(
+            path = "/api/pegawai/daftar",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<List<DaftarPegawaiResponse>> getDaftarPegawai(){
+        List<DaftarPegawaiResponse> comboBoxResponses = pegawaiService.getDaftarPegawai();
+
+        return WebResponse.<List<DaftarPegawaiResponse>>builder().data(comboBoxResponses).build();
     }
 }
