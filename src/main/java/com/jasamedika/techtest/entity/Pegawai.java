@@ -1,13 +1,12 @@
 package com.jasamedika.techtest.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -68,6 +67,9 @@ public class Pegawai extends BaseEntity{
     private String namaPendidikan;
 
     private String photo;
+
+    @OneToMany(mappedBy = "pegawai")
+    private List<Absensi> absensis;
 
 
 }
